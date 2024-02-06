@@ -58,7 +58,7 @@ header i {
 .contianer-game .rows > div span,
 .contianer-game .colums > div span {
   display: inline-block;
-
+  user-select: none;
   padding: 0 2px;
   font-size: 20px;
   border: 1px solid #777;
@@ -80,12 +80,35 @@ header i {
   border: 4px solid #333;
   margin: 20px 0 0;
 }
+.boxs-game.block {
+  pointer-events: none;
+}
 .boxs-game > div {
   width: 80px;
   height: 80px;
   border-left: 1px solid #777;
   border-bottom: 1px solid #777;
   position: relative;
+}
+.boxs-game > div.transparent {
+  pointer-events: none;
+  transition: 0.3s;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background-color: #777;
+    border-radius: 6px;
+    left: 50%;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
 }
 .boxs-game > div.wrong {
   pointer-events: none;
@@ -98,12 +121,42 @@ header i {
     background-color: red;
     border-radius: 6px;
     left: 50%;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
   }
   &::after {
     transform: rotate(-45deg);
+    animation-name: wrong-after;
   }
   &::before {
     transform: rotate(45deg);
+    animation-name: wrong-before;
+  }
+}
+@keyframes wrong-before {
+  0% {
+    transform: rotate(45deg) scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes wrong-after {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+    opacity: 0;
   }
 }
 .chose-color {
@@ -116,11 +169,11 @@ header i {
   height: 25px;
   border-radius: 50%;
   margin: 10px;
-  transition: 0.3s;
   position: relative;
 }
 .chose-color span.active {
   transform: scale(1.5);
+  transition: 0.3s;
   &::before {
     content: "";
     position: absolute;

@@ -39,7 +39,7 @@ let realyColor = [];
 
 CheckLevelGame();
 
-eventClick();
+// eventClick();
 
 function CheckLevelGame() {
   // Create Count Color in Row and Colums
@@ -86,6 +86,10 @@ function CheckLevelGame() {
 
       // Insert Boxs in the Boxs Game
       boxsGame.appendChild(boxGame);
+
+      boxGame.addEventListener("click", () => {
+        eventClick(boxGame);
+      });
     }
   }
 
@@ -94,7 +98,6 @@ function CheckLevelGame() {
     (value, index, array) =>
       array.indexOf(value) === index && value !== "transparent"
   );
-  // console.log(realyColor);
 
   // Create Element For All Distance Colors
   realyColor.forEach((color) => {
@@ -108,11 +111,18 @@ function CheckLevelGame() {
 
     // Check Active Color
     choseColor.firstChild.classList.add("active");
+
+    colorSpan.addEventListener("click", () => {
+      onClickColor();
+      colorSpan.classList.add("active");
+      // eventClick();
+    });
   });
 
   // Play The Function
   rowsOrColsCountCol("row", "rows", "width");
   rowsOrColsCountCol("colum", "colums", "height");
+  // eventClick();
 }
 
 // Function Count Rows And Colums Colors
@@ -123,8 +133,8 @@ function rowsOrColsCountCol(rowOrColum, RowsOrColums, widthOrheight) {
   // Loop for Check All Row
   for (let i = 1; i <= CountBoxsRowOrColum; i++) {
     // Get All Box In The Currnt Row
-    let currntRowBoxs = allBoxs.filter((row) =>
-      row.classList.contains(`${rowOrColum}-${i}`)
+    let currntRowBoxs = allBoxs.filter((ROrC) =>
+      ROrC.classList.contains(`${rowOrColum}-${i}`)
     );
     // Get The currnt Row Contianer Color
     let currntRow = document.querySelector(
@@ -181,60 +191,54 @@ function rowsOrColsCountCol(rowOrColum, RowsOrColums, widthOrheight) {
     }
   }
 }
-let alloptionColor = Array.from(choseColor.children);
 
-alloptionColor.forEach((chose, index) => {
-  chose.addEventListener("click", () => {
-    alloptionColor.forEach((element) => {
-      element.classList.remove("active");
-    });
-    alloptionColor[index].classList.add("active");
-    eventClick();
+// On Click The Chose Color
+function onClickColor() {
+  let alloptionColor = Array.from(choseColor.children);
+  alloptionColor.forEach((element) => {
+    element.classList.remove("active");
   });
-});
+}
 
 // Function When Click On Box
-function eventClick() {
-  //
+function eventClick(boxGame) {
+  // Get Choseing Color Active
   currntOptionCol = document
     .querySelector(".chose-color span.active")
     .getAttribute("option-color");
-  console.log(currntOptionCol);
 
-  // Get The All Boxs
-  let allBoxs = Array.from(document.querySelectorAll(".boxs-game > div"));
+  let currntAttrib = boxGame.getAttribute("data-color");
 
-  allBoxs.forEach((box, index) => {
-    box.addEventListener("click", (box) => {
-      let currntAttrib = allBoxs[index].getAttribute("data-color");
+  if (currntOptionCol === currntAttrib) {
+    boxGame.style.backgroundColor = currntAttrib;
+    // console.log("yes");
+  } else {
+    CountLive--;
+    boxGame.classList.add("wrong");
 
-      if (currntOptionCol === currntAttrib) {
-        allBoxs[index].style.backgroundColor = currntAttrib;
-        // console.log("yes");
-      } else {
-        allBoxs[index].classList.add("wrong");
-        // console.log("no");
-        CountLive--;
-        if (CountLive > 0) {
-          document
-            .querySelectorAll("header i")
-            .forEach((e) => e.classList.remove("active"));
+    if (currntAttrib === "transparent") {
+      setTimeout(() => {
+        boxGame.classList.remove("wrong");
+        boxGame.classList.add("transparent");
+      }, 600);
+    } else {
+      setTimeout(() => {
+        boxGame.style.backgroundColor = currntAttrib;
+        console.log("done");
+      }, 600);
+    }
 
-          for (let i = 1; i <= CountLive; i++) {
-            document
-              .querySelector("header")
-              .children[i].classList.add("active");
-            // console.log(CountLive);
-          }
-        } else {
-          document
-            .querySelectorAll("header i")
-            .forEach((e) => e.classList.remove("active"));
-          console.log("Game Over");
-          document.querySelector(".boxs-game").disabled = true;
-          console.log(contianer);
-        }
+    document
+      .querySelectorAll("header i")
+      .forEach((e) => e.classList.remove("active"));
+
+    if (CountLive > 0) {
+      for (let i = 0; i < CountLive; i++) {
+        document.querySelectorAll("header i")[i].classList.add("active");
       }
-    });
-  });
+    } else {
+      console.log("Game Over");
+      document.querySelector(".boxs-game").classList.add("block");
+    }
+  }
 }
