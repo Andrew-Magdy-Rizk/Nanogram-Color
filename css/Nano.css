@@ -188,27 +188,29 @@ header i {
 
 @media (max-width: 767px) {
   .boxs-game > div {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
   .boxs-game {
-    width: 258px;
-    height: 258px;
+    width: 233px;
+    height: 233px;
   }
   .contianer-game .rows > div span,
   .contianer-game .colums > div span {
-    font-size: 12px;
+    font-size: 10px;
   }
   .contianer-game .rows > div span {
-    line-height: 50px;
+    line-height: 45px;
   }
   .contianer-game .colums > div span {
-    width: 50px;
+    width: 45px;
   }
   .contianer-game .colums {
-    width: 258px;
+    width: 233px;
+    left: 5%;
   }
   .contianer-game .rows {
-    height: 258px;
+    height: 233px;
+    margin: 20px 15px 0 -40px;
   }
 }
