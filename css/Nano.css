@@ -40,7 +40,7 @@ header i {
 }
 .contianer-game .colums.colums-plus {
   width: 608px;
-  left: 5%;
+  left: 6%;
 }
 
 .contianer-game .rows.rows-plus {
@@ -116,6 +116,12 @@ header i {
 .boxs-game > div.plus {
   width: 60px;
   height: 60px;
+}
+.boxs-game > div.plus.colum-6 {
+  border-left: 2px solid black;
+}
+.boxs-game > div.plus.row-5 {
+  border-bottom: 2px solid black;
 }
 .boxs-game > div.transparent {
   pointer-events: none;
@@ -250,6 +256,21 @@ header i {
     height: 233px;
     margin: 20px 15px 0 -40px;
   }
+
+  header {
+    margin: 20px auto;
+  }
+  header .level-name {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  header i {
+    font-size: 25px;
+  }
+  .row-game {
+    justify-content: flex-end;
+    padding-right: 5px;
+  }
 }
 
 .control-massage {
@@ -304,30 +325,33 @@ header i {
 
 @media (max-width: 767px) {
   .boxs-game > div.plus {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
   }
   .boxs-game.game-plus {
-    width: 208px;
-    height: 208px;
+    width: 258px;
+    height: 258px;
+    margin: 5px 6px 0;
   }
   .contianer-game .colums.colums-plus {
-    width: 208px;
+    width: 258px;
     left: 10%;
   }
   .contianer-game .colums.colums-plus > div span {
-    width: 20px;
-    margin: 0 0 -1px;
+    width: 25px;
+    margin: 0 0 -2px;
+    height: 15px;
   }
   .contianer-game .rows.rows-plus {
-    height: 208px;
+    height: 258px;
+    margin: 5px 0 0 -40px;
   }
   .contianer-game .rows.rows-plus > div span {
-    line-height: 15px;
+    line-height: 23px;
     margin: 0 0.5px 0;
   }
   .contianer-game .colums.colums-plus > div span,
   .contianer-game .rows.rows-plus > div span {
-    font-size: 8px;
+    font-size: 9px;
   }
 }
