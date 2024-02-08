@@ -407,7 +407,7 @@ function winGame() {
       counter++;
     }
     if (counter === allBoxs.length) {
-      EndGameMassage("Level Completer!", "Next Level");
+      EndGameMassage("Level Completed!", "Next Level");
       level++;
       localStorage.setItem("Level", level);
     }
