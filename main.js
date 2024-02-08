@@ -11,13 +11,47 @@ let CountLive = 3;
 let currntOptionCol = "";
 
 // Class List Of The Color Boxs
-let listColor = ["black", "orange", "transparent"];
+let listColorLow = [
+  "rgb(3, 169, 244)",
+  "rgb(3, 169, 244)",
+  "orange",
+  "orange",
+  "orange",
+  "orange",
+  "transparent",
+];
+let listColorMedium = [
+  "rgb(3, 169, 244)",
+  "rgb(3, 169, 244)",
+  "orange",
+  "orange",
+  "rgb(244, 67, 54)",
+  "transparent",
+];
+let listColorHard = [
+  "rgb(3, 169, 244)",
+  "rgb(3, 169, 244)",
+  "orange",
+  "orange",
+  "rgb(76, 175, 80)",
+  "rgb(76, 175, 80)",
+  "rgb(63, 81, 181)",
+  "rgb(63, 81, 181)",
+  "rgb(244, 67, 54)",
+  "rgb(244, 67, 54)",
+  "transparent",
+  "transparent",
+  "transparent",
+  "transparent",
+];
 
 // Get The Box Game
 let boxsGame = document.querySelector(".boxs-game");
 
 // Get The Header Name Level
 let levelName = document.querySelector("header .level-name");
+
+level = parseInt(localStorage.getItem("Level"));
 
 // Set value Level
 levelName.textContent = `Level ${level}`;
@@ -34,15 +68,24 @@ let rowColor = document.querySelector(".contianer-game .rows");
 // Get Chose Color zone
 let choseColor = document.querySelector(".contianer-game .chose-color");
 
+// Get Massage
+let massage = document.querySelector(".massage");
+
+// Get Massage header
+let massageheader = document.querySelector(".massage h2");
+
+// Get Massage Buttom
+let massageButtom = document.querySelector(".massage a");
+
 //
 let realyColor = [];
 
 CheckLevelGame();
 
-// eventClick();
+// Get The All Boxs
+let allBoxs = Array.from(document.querySelectorAll(".boxs-game > div"));
 
 function CheckLevelGame() {
-  // Create Count Color in Row and Colums
   if (level > 10) {
     CountBoxsRowOrColum = 10;
   }
@@ -72,11 +115,32 @@ function CheckLevelGame() {
       boxGame.className = `row-${i}`;
       boxGame.classList.add(`colum-${j}`);
 
-      // Set Rondom Class On The All Boxs
-      boxGame.setAttribute(
-        "data-color",
-        listColor[Math.floor(Math.random() * listColor.length)]
-      );
+      if (level > 10) {
+        boxGame.classList.add(`plus`);
+        boxsGame.classList.add(`game-plus`);
+        columColor.classList.add(`colums-plus`);
+        rowColor.classList.add(`rows-plus`);
+      }
+
+      if (level <= 1) {
+        // Set Rondom Class On The All Boxs
+        boxGame.setAttribute(
+          "data-color",
+          listColorLow[Math.floor(Math.random() * listColorLow.length)]
+        );
+      } else if (level <= 50) {
+        // Set Rondom Class On The All Boxs
+        boxGame.setAttribute(
+          "data-color",
+          listColorMedium[Math.floor(Math.random() * listColorMedium.length)]
+        );
+      } else if (level <= 100000) {
+        // Set Rondom Class On The All Boxs
+        boxGame.setAttribute(
+          "data-color",
+          listColorHard[Math.floor(Math.random() * listColorHard.length)]
+        );
+      }
 
       // let data = boxGame.getAttribute("data-color");
       // boxGame.style.backgroundColor = data;
@@ -207,11 +271,13 @@ function eventClick(boxGame) {
     .querySelector(".chose-color span.active")
     .getAttribute("option-color");
 
-  let currntAttrib = boxGame.getAttribute("data-color");
+  let currntAttrib = boxGame.dataset.color;
 
   if (currntOptionCol === currntAttrib) {
     boxGame.style.backgroundColor = currntAttrib;
-    // console.log("yes");
+    boxGame.style.pointerEvents = "none";
+    checkAddColor(boxGame);
+    winGame(boxGame);
   } else {
     CountLive--;
     boxGame.classList.add("wrong");
@@ -219,12 +285,14 @@ function eventClick(boxGame) {
     if (currntAttrib === "transparent") {
       setTimeout(() => {
         boxGame.classList.remove("wrong");
+
         boxGame.classList.add("transparent");
       }, 600);
     } else {
       setTimeout(() => {
         boxGame.style.backgroundColor = currntAttrib;
-        console.log("done");
+        boxGame.style.pointerEvents = "none";
+        checkAddColor(boxGame);
       }, 600);
     }
 
@@ -238,7 +306,100 @@ function eventClick(boxGame) {
       }
     } else {
       console.log("Game Over");
-      document.querySelector(".boxs-game").classList.add("block");
+      EndGameMassage("Out Of Lives!", "Restart Level");
     }
   }
+}
+
+// Function Massage
+function EndGameMassage(massage, textButtom) {
+  // Creata Massage
+  let divMassage = document.createElement("div");
+
+  let Massage = document.createElement("div");
+
+  let header = document.createElement("h2");
+
+  let buttom = document.createElement("a");
+
+  divMassage.classList.add("control-massage");
+
+  Massage.classList.add("massage");
+
+  header.textContent = massage;
+
+  buttom.text = textButtom;
+
+  divMassage.append(Massage);
+
+  Massage.append(header);
+
+  Massage.append(buttom);
+
+  document.body.appendChild(divMassage);
+
+  // Start New Game
+  buttom.addEventListener("click", () => location.reload());
+}
+
+//
+function checkAddColor(boxGame) {
+  let classcurrntBox = boxGame.className.split(" ");
+
+  let RowBoxs = document.querySelectorAll(
+    `.boxs-game > div.${classcurrntBox[0]}:not([data-color = "transparent"])`
+  );
+  let columBoxs = document.querySelectorAll(
+    `.boxs-game > div.${classcurrntBox[1]}:not([data-color = "transparent"])`
+  );
+
+  counterRow = 0;
+
+  RowBoxs.forEach((rowBox) => {
+    if (rowBox.dataset.color === rowBox.style.backgroundColor) {
+      counterRow++;
+    }
+  });
+  console.log(RowBoxs);
+
+  if (counterRow == RowBoxs.length) {
+    let transBox = document.querySelectorAll(
+      `.boxs-game > div.${classcurrntBox[0]}[data-color = "transparent"]`
+    );
+    transBox.forEach((transBox) => transBox.classList.add("transparent"));
+  }
+
+  counterColum = 0;
+
+  columBoxs.forEach((columBox) => {
+    if (columBox.dataset.color === columBox.style.backgroundColor) {
+      counterColum++;
+    }
+  });
+
+  if (counterColum == columBoxs.length) {
+    let transBox = document.querySelectorAll(
+      `.boxs-game > div.${classcurrntBox[1]}[data-color = "transparent"]`
+    );
+    transBox.forEach((transBox) => transBox.classList.add("transparent"));
+  }
+}
+
+function winGame() {
+  let allBoxs = document.querySelectorAll(
+    `.boxs-game > div:not([data-color = "transparent"])`
+  );
+
+  let counter = 0;
+
+  allBoxs.forEach((box) => {
+    if (box.dataset.color == box.style.backgroundColor) {
+      counter++;
+    }
+    if (counter === allBoxs.length) {
+      EndGameMassage("Level Completer!", "Next Level");
+      level++;
+      localStorage.setItem("Level", level);
+    }
+  });
 }
