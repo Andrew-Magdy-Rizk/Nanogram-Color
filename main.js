@@ -50,7 +50,8 @@ let boxsGame = document.querySelector(".boxs-game");
 
 // Get The Header Name Level
 let levelName = document.querySelector("header .level-name");
-if (localStorage.getItem("Level") == false) {
+if (level === 1) {
+  console.log("not found");
   localStorage.setItem("Level", level);
 }
 
