@@ -51,9 +51,7 @@ let boxsGame = document.querySelector(".boxs-game");
 // Get The Header Name Level
 let levelName = document.querySelector("header .level-name");
 
-if (localStorage.getItem("Level")) {
-  level = parseInt(localStorage.getItem("Level"));
-}
+localStorage.setItem("Level", level);
 
 // Set value Level
 levelName.textContent = `Level ${level}`;
