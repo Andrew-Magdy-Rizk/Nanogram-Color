@@ -125,7 +125,7 @@ function CheckLevelGame() {
         rowColor.classList.add(`rows-plus`);
       }
 
-      if (level <= 1) {
+      if (level <= 5) {
         // Set Rondom Class On The All Boxs
         boxGame.setAttribute(
           "data-color",
