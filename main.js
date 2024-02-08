@@ -304,6 +304,7 @@ function eventClick(boxGame) {
         boxGame.style.backgroundColor = currntAttrib;
         boxGame.style.pointerEvents = "none";
         checkAddColor(boxGame);
+        winGame(boxGame);
       }, 600);
     }
 
