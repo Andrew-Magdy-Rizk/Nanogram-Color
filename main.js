@@ -1,5 +1,5 @@
 // The Level Game
-let level = 1;
+let level = +localStorage.getItem("Level");
 
 // Count The Boxs Game
 let CountBoxsRowOrColum = 5;
@@ -50,13 +50,14 @@ let boxsGame = document.querySelector(".boxs-game");
 
 // Get The Header Name Level
 let levelName = document.querySelector("header .level-name");
-if (level === 1) {
-  console.log("not found");
+if (level) {
+  // Set value Level
+  levelName.textContent = `Level ${level}`;
+} else {
+  level = 1;
+  levelName.textContent = `Level ${level}`;
   localStorage.setItem("Level", level);
 }
-
-// Set value Level
-levelName.textContent = `Level ${level}`;
 
 // Get The Contianer Colum Color
 let columColor = document.querySelector(".contianer-game .colums");
@@ -370,7 +371,6 @@ function checkAddColor(boxGame) {
       counterRow++;
     }
   });
-  console.log(RowBoxs);
 
   if (counterRow == RowBoxs.length) {
     let transBox = document.querySelectorAll(
