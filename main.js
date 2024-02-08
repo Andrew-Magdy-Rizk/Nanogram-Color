@@ -131,7 +131,7 @@ function CheckLevelGame() {
           "data-color",
           listColorLow[Math.floor(Math.random() * listColorLow.length)]
         );
-      } else if (level <= 11) {
+      } else if (level <= 20) {
         // Set Rondom Class On The All Boxs
         boxGame.setAttribute(
           "data-color",
