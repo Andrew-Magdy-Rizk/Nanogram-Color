@@ -317,13 +317,14 @@ header i {
   }
   .contianer-game .colums.colums-plus > div span {
     width: 20px;
-    margin: 0 0 1px;
+    margin: 0 0 -1px;
   }
   .contianer-game .rows.rows-plus {
     height: 208px;
   }
   .contianer-game .rows.rows-plus > div span {
     line-height: 15px;
+    margin: 0 0.5px 0;
   }
   .contianer-game .colums.colums-plus > div span,
   .contianer-game .rows.rows-plus > div span {
