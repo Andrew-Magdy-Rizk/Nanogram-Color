@@ -231,10 +231,18 @@ function rowsOrColsCountCol(rowOrColum, RowsOrColums, widthOrheight) {
 
           let addPlus = parseInt(lastSpanPlus.textContent) + 1;
 
-          if (widthOrheight === "width") {
-            lastSpanPlus.style.width = `${lastSpanPlus.clientWidth + 15}px`;
-          } else if (widthOrheight === "height") {
-            lastSpanPlus.style.height = `${lastSpanPlus.clientHeight + 15}px`;
+          if (level > 10) {
+            if (widthOrheight === "width") {
+              lastSpanPlus.style.width = `${lastSpanPlus.clientWidth + 4}px`;
+            } else if (widthOrheight === "height") {
+              lastSpanPlus.style.height = `${lastSpanPlus.clientHeight + 4}px`;
+            }
+          } else {
+            if (widthOrheight === "width") {
+              lastSpanPlus.style.width = `${lastSpanPlus.clientWidth + 10}px`;
+            } else if (widthOrheight === "height") {
+              lastSpanPlus.style.height = `${lastSpanPlus.clientHeight + 10}px`;
+            }
           }
 
           lastSpanPlus.textContent = addPlus;

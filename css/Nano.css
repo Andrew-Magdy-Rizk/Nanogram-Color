@@ -301,3 +301,32 @@ header i {
 .massage a:hover {
   color: #358cff;
 }
+
+@media (max-width: 767px) {
+  .boxs-game > div.plus {
+    width: 20px;
+    height: 20px;
+  }
+  .boxs-game.game-plus {
+    width: 208px;
+    height: 208px;
+  }
+  .contianer-game .colums.colums-plus {
+    width: 208px;
+    left: 10%;
+  }
+  .contianer-game .colums.colums-plus > div span {
+    width: 20px;
+    margin: 0 0 1px;
+  }
+  .contianer-game .rows.rows-plus {
+    height: 208px;
+  }
+  .contianer-game .rows.rows-plus > div span {
+    line-height: 15px;
+  }
+  .contianer-game .colums.colums-plus > div span,
+  .contianer-game .rows.rows-plus > div span {
+    font-size: 8px;
+  }
+}
