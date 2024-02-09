@@ -205,6 +205,8 @@ header i {
 .chose-color {
   margin: 30px auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .chose-color span {
   width: 25px;
@@ -213,6 +215,28 @@ header i {
   border-radius: 50%;
   margin: 10px;
   position: relative;
+}
+.chose-color span.transparent {
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background-color: #777;
+    border-radius: 6px;
+    left: 50%;
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+}
+.chose-color span.transparent.active {
+  transform: scale(1.5);
+  transition: 0.3s;
 }
 .chose-color span.active {
   transform: scale(1.5);

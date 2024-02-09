@@ -12,34 +12,38 @@ let currntOptionCol = "";
 
 // Class List Of The Color Boxs
 let listColorLow = [
-  "rgb(3, 169, 244)",
-  "rgb(3, 169, 244)",
-  "orange",
-  "orange",
-  "orange",
-  "orange",
+  "rgb(52 104 192)",
+  "rgb(52 104 192)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
   "transparent",
 ];
 let listColorMedium = [
-  "rgb(3, 169, 244)",
-  "rgb(3, 169, 244)",
-  "orange",
-  "orange",
-  "rgb(244, 67, 54)",
+  "rgb(134 167 252)",
+  "rgb(134 167 252)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 144 188)",
+  "rgb(255 144 188)",
+  "rgb(52 104 192)",
+  "rgb(52 104 192)",
   "transparent",
 ];
 let listColorHard = [
-  "rgb(3, 169, 244)",
-  "rgb(3, 169, 244)",
-  "orange",
-  "orange",
-  "rgb(76, 175, 80)",
-  "rgb(76, 175, 80)",
-  "rgb(63, 81, 181)",
-  "rgb(63, 81, 181)",
-  "rgb(244, 67, 54)",
-  "rgb(244, 67, 54)",
-  "transparent",
+  "rgb(134 167 252)",
+  "rgb(134 167 252)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 165 0)",
+  "rgb(255 144 188)",
+  "rgb(255 144 188)",
+  "rgb(52 104 192)",
+  "rgb(52 104 192)",
+  "rgb(52 104 192)",
+  "rgb(52 104 192)",
   "transparent",
   "transparent",
   "transparent",
@@ -162,8 +166,7 @@ function CheckLevelGame() {
 
   // Distance Colors Of Array
   realyColor = AllColorBoxs.filter(
-    (value, index, array) =>
-      array.indexOf(value) === index && value !== "transparent"
+    (value, index, array) => array.indexOf(value) === index
   );
 
   // Create Element For All Distance Colors
@@ -178,6 +181,11 @@ function CheckLevelGame() {
 
     // Check Active Color
     choseColor.firstChild.classList.add("active");
+
+    if (color === "transparent") {
+      colorSpan.style.order = "-1";
+      colorSpan.classList.add("transparent");
+    }
 
     colorSpan.addEventListener("click", () => {
       onClickColor();
@@ -285,6 +293,10 @@ function eventClick(boxGame) {
   let currntAttrib = boxGame.dataset.color;
 
   if (currntOptionCol === currntAttrib) {
+    if (currntOptionCol === "transparent") {
+      boxGame.classList.add("transparent");
+    }
+
     boxGame.style.backgroundColor = currntAttrib;
     boxGame.style.pointerEvents = "none";
     checkAddColor(boxGame);
