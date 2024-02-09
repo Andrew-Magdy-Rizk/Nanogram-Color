@@ -7,11 +7,11 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 header {
-  margin: 30px auto 50px;
+  margin: 20px auto;
   text-align: center;
 }
 header .level-name {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 header i.active {
   color: red;
@@ -203,7 +203,7 @@ header i {
   }
 }
 .chose-color {
-  margin: 30px auto;
+  margin: 20px auto;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -216,27 +216,31 @@ header i {
   margin: 10px;
   position: relative;
 }
-.chose-color span.transparent {
+.chose-color span.transparent,
+.chose-color span.active.transparent {
   &::before,
   &::after {
     content: "";
     position: absolute;
     width: 3px;
-    height: 100%;
+    height: 80%;
     background-color: #777;
     border-radius: 6px;
     left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   &::after {
-    transform: rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
   &::before {
-    transform: rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 }
-.chose-color span.transparent.active {
+.chose-color span.active.transparent {
   transform: scale(1.5);
   transition: 0.3s;
+  border: 1px solid #777;
 }
 .chose-color span.active {
   transform: scale(1.5);
