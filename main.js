@@ -12,38 +12,38 @@ let currntOptionCol = "";
 
 // Class List Of The Color Boxs
 let listColorLow = [
-  "rgb(52 104 192)",
-  "rgb(52 104 192)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
+  "rgb(52, 104, 192)",
+  "rgb(52, 104, 192)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
   "transparent",
 ];
 let listColorMedium = [
-  "rgb(134 167 252)",
-  "rgb(134 167 252)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 144 188)",
-  "rgb(255 144 188)",
-  "rgb(52 104 192)",
-  "rgb(52 104 192)",
+  "rgb(134, 167, 252)",
+  "rgb(134, 167, 252)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 144, 188)",
+  "rgb(255, 144, 188)",
+  "rgb(52, 104, 192)",
+  "rgb(52, 104, 192)",
   "transparent",
 ];
 let listColorHard = [
-  "rgb(134 167 252)",
-  "rgb(134 167 252)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 165 0)",
-  "rgb(255 144 188)",
-  "rgb(255 144 188)",
-  "rgb(52 104 192)",
-  "rgb(52 104 192)",
-  "rgb(52 104 192)",
-  "rgb(52 104 192)",
+  "rgb(134, 167, 252)",
+  "rgb(134, 167, 252)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 165, 0)",
+  "rgb(255, 144, 188)",
+  "rgb(255, 144, 188)",
+  "rgb(52, 104, 192)",
+  "rgb(52, 104, 192)",
+  "rgb(52, 104, 192)",
+  "rgb(52, 104, 192)",
   "transparent",
   "transparent",
   "transparent",
@@ -295,10 +295,11 @@ function eventClick(boxGame) {
   if (currntOptionCol === currntAttrib) {
     if (currntOptionCol === "transparent") {
       boxGame.classList.add("transparent");
+    } else {
+      boxGame.style.backgroundColor = currntAttrib;
     }
-
-    boxGame.style.backgroundColor = currntAttrib;
     boxGame.style.pointerEvents = "none";
+
     checkAddColor(boxGame);
     winGame(boxGame);
   } else {
@@ -329,7 +330,6 @@ function eventClick(boxGame) {
         document.querySelectorAll("header i")[i].classList.add("active");
       }
     } else {
-      console.log("Game Over");
       EndGameMassage("Out Of Lives!", "Restart Level");
     }
   }
@@ -384,6 +384,7 @@ function checkAddColor(boxGame) {
       counterRow++;
     }
   });
+  console.log(counterRow);
 
   if (counterRow == RowBoxs.length) {
     let transBox = document.querySelectorAll(
